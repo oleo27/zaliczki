@@ -63,11 +63,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <br><br>
 
         <label>Maksymalna kwota dotacji - zgodnie z wnioskiem o dofinansowanie:</label>
-        <input type="number" step="0.01" name="maksDotacja" placeholder="0.00">
+        <input type="text" step="0.01" name="maksDotacja" placeholder="0.00" class="kwota">
         <br><br>
 
         <label>Procent powierzchni budynku przeznaczony na działalność gospodarczą:</label>
-        <input type="text" name="procentDzialalnosci" placeholder="0.00" onblur="this.value=parseFloat(this.value.replace(',', '.')).toFixed(2)">
+        <input type="text" step="0.01" name="procentDzialalnosci" placeholder="0.00" class="kwota">
         <label style="display:inline;">%</label>
         <br><br>
 
@@ -76,20 +76,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div id="sekcjaZaliczki" style="display:none;">
             <label>Kwota zaliczek wnioskowanych/wypłaconych na przedsięwzięcia z Tab. 1 i 2 (tj. audyt, źródło ciepła, instalacja C.O. i C.W.U.):</label>
-            <input type="text" name="zaliczkiPrzed12" placeholder="0.00" onblur="this.value=parseFloat(this.value.replace(',', '.')).toFixed(2)">
+            <input type="text" name="zaliczkiPrzed12" placeholder="0.00" class="kwota">
             <br><br>
 
             <label>Kwota zaliczek wnioskowanych/wypłaconych na przedsięwzięcia z Tab. 3 (tj. ocieplenie przegród, wymiana stolarki, wentylacja mechaniczna):</label>
-            <input type="text" name="zaliczkiPrzed3" placeholder="0.00" onblur="this.value=parseFloat(this.value.replace(',', '.')).toFixed(2)">
+            <input type="text" name="zaliczkiPrzed3" placeholder="0.00" class="kwota">
             <br><br>
         </div>
         <div id="sekcjaWopy" style="display:none;">
             <label>Kwota dotacji wnioskowanych/wypłaconych na przedsięwzięcia z Tab. 1 i 2 (tj. audyt, źródło ciepła, instalacja C.O. i C.W.U.):</label>
-            <input type="text" name="dotacjaPrzed12" placeholder="0.00" onblur="this.value=parseFloat(this.value.replace(',', '.')).toFixed(2)">
+            <input type="text" name="dotacjaPrzed12" placeholder="0.00" class="kwota">
             <br><br>
 
             <label>Kwota dotacji wnioskowanych/wypłaconych na przedsięwzięcia z Tab. 3 (tj. ocieplenie przegród, wymiana stolarki, wentylacja mechaniczna):</label>
-            <input type="text" name="dotacjaPrzed3" placeholder="0.00" onblur="this.value=parseFloat(this.value.replace(',', '.')).toFixed(2)">
+            <input type="text" name="dotacjaPrzed3" placeholder="0.00" class="kwota">
             <br><br>
         </div>
 
@@ -121,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo "    </select>
                     </td>";
                 echo "<td></td>";
-                echo "<td><input type='number' step='0.01' name='zrodlo_kwota' style='width:120px'></td>";
+                echo "<td><input type='text' step='0.01' name='zrodlo_kwota' class='kwota' style='width:120px'></td>";
                 echo "</tr>";
 
                 // ---- INNE (NIETERMO) ----
@@ -131,9 +131,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo "<td><input type='checkbox' name='nietermo[".$nazwa."][wybor]' value='1'></td>";
                     echo "<td>$nazwa</td>";
                     // pole "liczba" zablokowane
-                    echo "<td><input type='number' step='1' name='nietermo[".$nazwa."][liczba]' value='' style='width:80px' disabled></td>";
+                    echo "<td><input type='text' step='1' name='nietermo[".$nazwa."][liczba]' value='' style='width:80px' disabled></td>";
                     echo "<td></td>";
-                    echo "<td><input type='number' step='0.01' name='nietermo[".$nazwa."][kwota]' style='width:120px'></td>";
+                    echo "<td><input type='text' step='0.01' name='nietermo[".$nazwa."][kwota]' class='kwota' style='width:120px'></td>";
                     echo "</tr>";
                 }
 
@@ -154,9 +154,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo "<tr>";
                     echo "<td><input type='checkbox' name='termo[".$nazwa."][wybor]' value='1'></td>";
                     echo "<td>$wyswietlanaNazwa</td>";
-                    echo "<td><input type='number' step='0.01' name='termo[".$nazwa."][liczba]' style='width:80px' $disabled></td>";
+                    echo "<td><input type='text' step='0.01' name='termo[".$nazwa."][liczba]' class='metry' style='width:80px' $disabled></td>";
                     echo "<td>$jednostka</td>";
-                    echo "<td><input type='number' step='0.01' name='termo[".$nazwa."][kwota]' style='width:120px'></td>";
+                    echo "<td><input type='text' step='0.01' name='termo[".$nazwa."][kwota]' class='kwota' style='width:120px'></td>";
                     echo "</tr>";
                 }
                 ?>

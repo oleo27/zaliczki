@@ -23,21 +23,23 @@ document.getElementById("liczbaWop").addEventListener("change", function () {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-	document.querySelectorAll('input[step="0.01"]').forEach((i) => {
-		i.addEventListener(
-			"input",
-			() =>
-				(i.value = i.value
-					.replace(",", ".")
-					.replace(/^(\d+)(\.\d{0,2})?.*$/, "$1$2"))
-		);
+	function restrictDecimals(input, decimals = 2) {
+		input.addEventListener("input", function () {
+			let value = this.value;
+			value = value.replace(/\./g, ",");
 
-		i.addEventListener("blur", () => {
-			if (i.value) i.value = parseFloat(i.value.replace(",", ".")).toFixed(2);
-		});
+			const parts = value.split(",");
 
-		i.form?.addEventListener("submit", () => {
-			if (i.value) i.value = i.value.replace(",", ".");
+			if (parts[1]) {
+				parts[1] = parts[1].substring(0, decimals);
+				value = parts[0] + "," + parts[1];
+			}
+			value = value.replace(/[^0-9,]/g, "");
+
+			this.value = value;
 		});
-	});
+	}
+	document
+		.querySelectorAll(".kwota, .metry")
+		.forEach((input) => restrictDecimals(input, 2));
 });
