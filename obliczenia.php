@@ -108,13 +108,13 @@ function obliczZaliczke(array $post, array $kwoty): array {
 
     if ($wyborS && $kwotaS > 0) {
         $limitS = $slownik['termo'][$rekuperatorScienny] * $liczbaS;
-        $kwotaReku = min($kwotaS, $limitS);   // UWAGA: bez × 0.7 !!!
+        $kwotaReku = min($kwotaS, $limitS); 
     }
 
     $kwotaCentralna = 0;
 
     if ($wyborJC && $kwotaJC > 0) {
-        $kwotaCentralna = $kwotaJC;  // jednostka centralna nie ma osobnego limitu
+        $kwotaCentralna = $kwotaJC;  // jednostka centralna bez osobnego limitu
     }
 
     $kwotaSuma = $kwotaReku + $kwotaCentralna;
@@ -139,9 +139,6 @@ function obliczZaliczke(array $post, array $kwoty): array {
     $dotacja = $dotacja * (1-$procentDzialalnosc);
 
     $zaliczka = min($dotacja*0.35, $maksZaliczka);
-
-    $wynik['dotacjaTermo'] = $dotacjaTermo;
-    $wynik['dotacjaNietermo'] = $dotacjaNietermo;
     $wynik['dotacja'] = $dotacja;
     $wynik['zaliczka'] = $zaliczka;
     

@@ -19,9 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h1>Kalkulator zaliczki WFOŚiGW</h1>
 
     <form method="post" action="">
-        <!-- =================== DANE PODSTAWOWE =================== -->
 
-        <!-- Numer dyspozycji -->
+        <!-- ile DWZ -->
         <label>Numer dyspozycji wypłaty zaliczki:</label>
         <select name="nrDyspo" id="nrDyspo" required>
             <option value="">-- wybierz --</option>
@@ -31,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </select>
         <br><br>
 
-        <!-- Liczba złożonych wniosków -->
+        <!-- ile WoP -->
         <label>Liczba złożonych wniosków o płatność:</label>
         <select name="liczbaWop" id="liczbaWop" required>
             <option value="">-- wybierz --</option>
@@ -43,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <h2>Dane podstawowe</h2>
 
-        <!-- Poziom dofinansowania -->
+        <!-- poziom dofinansowania -->
         <label>Poziom dofinansowania:</label>
         <select name="wyborDof" required>
             <option value="">-- wybierz --</option>
@@ -52,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </select>
         <br><br>
 
-        <!-- Rodzaj przedsięwzięcia -->
+        <!-- rodzaj przedsięwzięcia -->
         <label>Rodzaj przedsięwzięcia - zgodnie z wnioskiem o dofinansowanie:</label>
         <select name="wyborPrzedsiewziecia" required>
             <option value="">-- wybierz --</option>
@@ -71,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label style="display:inline;">%</label>
         <br><br>
 
-        
+        <!-- wnioskowane kwoty  -->
         <h2 id="headerKwoty" style="display:none;">Kwoty wnioskowane / wypłacone</h2>
 
         <div id="sekcjaZaliczki" style="display:none;">
@@ -108,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </thead>
             <tbody>
                 <?php
-                // ---- ŹRÓDŁA CIEPŁA -----
+                // ---- źródła ciepła -----
                 echo '<tr><th colspan="5" style="text-align:left;">Źródło ciepła</th></tr>';
                 echo "<tr>";
                 echo "<td><input type='checkbox' name='nietermo_zc[wybor]' value='1'></td>";
@@ -124,20 +123,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo "<td><input type='text' step='0.01' name='zrodlo_kwota' class='kwota' style='width:120px'></td>";
                 echo "</tr>";
 
-                // ---- INNE (NIETERMO) ----
+                // ---- inne koszty nietermo ----
                 echo '<tr><th colspan="5" style="text-align:left;">Inne koszty kwalifikowane</th></tr>';
                 foreach ($kwoty['najwyzszy_pozostale'] as $nazwa => $limit) {
                     echo "<tr>";
                     echo "<td><input type='checkbox' name='nietermo[".$nazwa."][wybor]' value='1'></td>";
                     echo "<td>$nazwa</td>";
-                    // pole "liczba" zablokowane
                     echo "<td><input type='text' step='1' name='nietermo[".$nazwa."][liczba]' value='' style='width:80px' disabled></td>";
                     echo "<td></td>";
                     echo "<td><input type='text' step='0.01' name='nietermo[".$nazwa."][kwota]' class='kwota' style='width:120px'></td>";
                     echo "</tr>";
                 }
 
-                // ---- TERMOMODERNIZACJA ----
+                // ---- termo ----
                 echo '<tr><th colspan="5" style="text-align:left;">Termomodernizacja</th></tr>';
                 foreach ($kwoty['najwyzszy_termo'] as $nazwa => $limit) {
                     $wyswietlanaNazwa = $nazwa;
@@ -168,15 +166,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit">Oblicz</button>
     </form>
 
+    <!-- wyniki -->
     <?php if ($wynik): ?>
-    <h2>Wyniki</h2>
+    <h2 id="wyniki">Wyniki</h2>
     <?php if (isset($wynik['error'])): ?>
         <p style="color:red"><?= $wynik['error'] ?></p>
     <?php else: ?>
-        <p>Dotacja – termomodernizacja: <?= number_format($wynik['dotacjaTermo'], 2, ',', ' ') ?> zł</p>
-        <p>Dotacja – pozostałe: <?= number_format($wynik['dotacjaNietermo'], 2, ',', ' ') ?> zł</p>
-        <p>Łączna wartość kwalifikowanych kosztów: <?= number_format($wynik['dotacja'], 2, ',', ' ') ?> zł</p>
-        <p>Maksymalna zaliczka: <?= number_format($wynik['maksZaliczka'], 2, ',', ' ') ?> zł</p>
+        <p>Wyliczona kwota dotacji: <?= number_format($wynik['dotacja'], 2, ',', ' ') ?> zł</p>
         <p>Wyliczona kwota zaliczki: <?= number_format($wynik['zaliczka'], 2, ',', ' ') ?> zł</p>
     <?php endif; ?>
 <?php endif; ?>

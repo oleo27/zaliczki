@@ -43,3 +43,15 @@ document.addEventListener("DOMContentLoaded", () => {
 		.querySelectorAll(".kwota, .metry")
 		.forEach((input) => restrictDecimals(input, 2));
 });
+
+function scrollToWynik() {
+	const wynikElement = document.getElementById("wyniki");
+	if (wynikElement) {
+		wynikElement.scrollIntoView({ behavior: "smooth" });
+	}
+}
+
+// Wywołanie funkcji tylko jeśli istnieje wynik
+if (document.getElementById("wyniki")) {
+	scrollToWynik();
+}
