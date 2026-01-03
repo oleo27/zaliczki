@@ -1,3 +1,9 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
 body {
 	font-family: Arial, sans-serif;
 	background-color: #f5f5f5;
@@ -19,7 +25,6 @@ form {
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-/* --------------------- Nagłówki sekcji --------------------- */
 form h2 {
 	border-bottom: 2px solid #ddd;
 	padding-bottom: 5px;
@@ -27,7 +32,6 @@ form h2 {
 	color: #444;
 }
 
-/* --------------------- Etykiety i pola --------------------- */
 form label {
 	display: block;
 	margin-top: 15px;
@@ -48,12 +52,10 @@ form select {
 }
 
 form input:disabled {
-	background-color: #eee;
 	color: #999;
 	cursor: not-allowed;
 }
 
-/* --------------------- Focus --------------------- */
 form input:focus,
 form select:focus {
 	border-color: #007bff;
@@ -61,7 +63,6 @@ form select:focus {
 	outline: none;
 }
 
-/* --------------------- Tabela --------------------- */
 table {
 	width: 100%;
 	border-collapse: collapse;
@@ -87,19 +88,18 @@ table input[type="checkbox"] {
 	margin: 0 auto;
 }
 
-/* --------------------- Przycisk --------------------- */
 button[type="submit"] {
 	margin-top: 25px;
 	padding: 10px 20px;
 	font-size: 15px;
-	background-color: #007bff;
-	color: white;
-	border: none;
+	background-color: #fff;
+	border: 2px solid #194f00;
 	border-radius: 6px;
 	cursor: pointer;
-	transition: background-color 0.2s;
+	transition: 0.2s;
 }
 
 button[type="submit"]:hover {
-	background-color: #0056b3;
+	background-color: #194f00;
+	color: #fff;
 }
