@@ -55,3 +55,29 @@ function scrollToWynik() {
 if (document.getElementById("wyniki")) {
 	scrollToWynik();
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+	document.querySelectorAll("tbody tr").forEach(function (row) {
+		const checkbox = row.querySelector("input[type='checkbox']");
+		if (!checkbox) return;
+
+		const fields = row.querySelectorAll("input[type='text'], select");
+
+		function syncState() {
+			fields.forEach(function (f) {
+				if (checkbox.checked) {
+					f.removeAttribute("disabled");
+				} else {
+					f.setAttribute("disabled", "disabled");
+					// czyść wartości
+					if (f.tagName === "INPUT") f.value = "";
+					if (f.tagName === "SELECT") f.selectedIndex = 0;
+				}
+			});
+		}
+
+		syncState();
+
+		checkbox.addEventListener("change", syncState);
+	});
+});

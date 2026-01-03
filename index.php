@@ -128,8 +128,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 foreach ($kwoty['najwyzszy_pozostale'] as $nazwa => $limit) {
                     echo "<tr>";
                     echo "<td><input type='checkbox' name='nietermo[".$nazwa."][wybor]' value='1'></td>";
-                    echo "<td>$nazwa</td>";
-                    echo "<td><input type='text' step='1' name='nietermo[".$nazwa."][liczba]' value='' style='width:80px' disabled></td>";
+                    echo "<td colspan='2'>$nazwa</td>";
+                    // echo "<td><input type='text' step='1' name='nietermo[".$nazwa."][liczba]' value='' style='width:80px' disabled></td>";
                     echo "<td></td>";
                     echo "<td><input type='text' step='0.01' name='nietermo[".$nazwa."][kwota]' class='kwota' style='width:120px'></td>";
                     echo "</tr>";
