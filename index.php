@@ -62,11 +62,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <br><br>
 
         <label>Maksymalna kwota dotacji - zgodnie z wnioskiem o dofinansowanie:</label>
-        <input type="text" step="0.01" name="maksDotacja" placeholder="0.00" class="kwota">
+        <input type="text" step="0.01" name="maksDotacja" placeholder="0.00" class="kwota" required>
         <br><br>
 
         <label>Procent powierzchni budynku przeznaczony na działalność gospodarczą:</label>
-        <input type="text" step="0.01" name="procentDzialalnosci" placeholder="0.00" class="kwota">
+        <input type="text" step="0.01" name="procentDzialalnosci" placeholder="0.00" class="kwota" required>
         <label style="display:inline;">%</label>
         <br><br>
 
@@ -75,20 +75,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div id="sekcjaZaliczki" style="display:none;">
             <label>Kwota zaliczek wnioskowanych/wypłaconych na przedsięwzięcia z Tab. 1 i 2 (tj. audyt, źródło ciepła, instalacja C.O. i C.W.U.):</label>
-            <input type="text" name="zaliczkiPrzed12" placeholder="0.00" class="kwota">
+            <input type="text" name="zaliczkiPrzed12" placeholder="0.00" class="kwota" required>
             <br><br>
 
             <label>Kwota zaliczek wnioskowanych/wypłaconych na przedsięwzięcia z Tab. 3 (tj. ocieplenie przegród, wymiana stolarki, wentylacja mechaniczna):</label>
-            <input type="text" name="zaliczkiPrzed3" placeholder="0.00" class="kwota">
+            <input type="text" name="zaliczkiPrzed3" placeholder="0.00" class="kwota" required>
             <br><br>
         </div>
         <div id="sekcjaWopy" style="display:none;">
             <label>Kwota dotacji wnioskowanych/wypłaconych na przedsięwzięcia z Tab. 1 i 2 (tj. audyt, źródło ciepła, instalacja C.O. i C.W.U.):</label>
-            <input type="text" name="dotacjaPrzed12" placeholder="0.00" class="kwota">
+            <input type="text" name="dotacjaPrzed12" placeholder="0.00" class="kwota" required>
             <br><br>
 
             <label>Kwota dotacji wnioskowanych/wypłaconych na przedsięwzięcia z Tab. 3 (tj. ocieplenie przegród, wymiana stolarki, wentylacja mechaniczna):</label>
-            <input type="text" name="dotacjaPrzed3" placeholder="0.00" class="kwota">
+            <input type="text" name="dotacjaPrzed3" placeholder="0.00" class="kwota" required>
             <br><br>
         </div>
 
@@ -129,7 +129,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo "<tr>";
                     echo "<td><input type='checkbox' name='nietermo[".$nazwa."][wybor]' value='1'></td>";
                     echo "<td colspan='2'>$nazwa</td>";
-                    // echo "<td><input type='text' step='1' name='nietermo[".$nazwa."][liczba]' value='' style='width:80px' disabled></td>";
                     echo "<td></td>";
                     echo "<td><input type='text' step='0.01' name='nietermo[".$nazwa."][kwota]' class='kwota' style='width:120px'></td>";
                     echo "</tr>";
@@ -141,18 +140,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $wyswietlanaNazwa = $nazwa;
                     $jednostka = "m²";
                     $disabled = "";
+                    $isCentralna = false;
                     if ($nazwa === "Wentylacja mechaniczna z odzyskiem ciepła") {
                         $wyswietlanaNazwa = "Wentylacja mechaniczna z odzyskiem ciepła - jednostka centralna";
                         $jednostka = "";              
-                        $disabled = "disabled";         
+                        $disabled = "disabled";
+                        $isCentralna = true;         
                     }
                     if ($nazwa === "Wentylacja mechaniczna z odzyskiem ciepła - rekuperator ścienny") {
                         $jednostka = "szt.";
                     }
                     echo "<tr>";
                     echo "<td><input type='checkbox' name='termo[".$nazwa."][wybor]' value='1'></td>";
-                    echo "<td>$wyswietlanaNazwa</td>";
-                    echo "<td><input type='text' step='0.01' name='termo[".$nazwa."][liczba]' class='metry' style='width:80px' $disabled></td>";
+                    if ($isCentralna){
+                        echo "<td colspan='2'>$wyswietlanaNazwa</td>";
+                    }
+                    else {
+                        echo "<td>$wyswietlanaNazwa</td>";
+                        echo "<td><input type='text' step='0.01' name='termo[".$nazwa."][liczba]' class='metry' style='width:80px' $disabled></td>";
+                    }                   
                     echo "<td>$jednostka</td>";
                     echo "<td><input type='text' step='0.01' name='termo[".$nazwa."][kwota]' class='kwota' style='width:120px'></td>";
                     echo "</tr>";
