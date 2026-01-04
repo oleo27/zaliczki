@@ -5,7 +5,7 @@ document.getElementById("nrDyspo").addEventListener("change", function () {
 		naglowek.style.display = "block";
 		sekcja.style.display = "block";
 	} else {
-		sekcja.style.display = "none";
+		naglowek.style.display = "none";
 		sekcja.style.display = "none";
 	}
 });
