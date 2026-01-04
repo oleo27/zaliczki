@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			fields.forEach(function (f) {
 				if (checkbox.checked) {
 					f.removeAttribute("disabled");
+					if (f.tagName === "INPUT") f.readOnly = false;
 				} else {
 					f.setAttribute("disabled", "disabled");
 					// czyść wartości
