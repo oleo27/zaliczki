@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					if (f.tagName === "INPUT") f.readOnly = false;
 				} else {
 					f.setAttribute("disabled", "disabled");
+					if (f.tagName === "INPUT") f.readOnly = true;
 					// czyść wartości
 					if (f.tagName === "INPUT") f.value = "";
 					if (f.tagName === "SELECT") f.selectedIndex = 0;
