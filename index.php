@@ -75,20 +75,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div id="sekcjaZaliczki" style="display:none;">
             <label>Kwota zaliczek wnioskowanych/wypłaconych na przedsięwzięcia z Tab. 1 i 2 (tj. audyt, źródło ciepła, instalacja C.O. i C.W.U.):</label>
-            <input type="text" name="zaliczkiPrzed12" placeholder="0.00" class="kwota" required>
+            <input type="text" name="zaliczkiPrzed12" placeholder="0.00" class="kwota">
             <br><br>
 
             <label>Kwota zaliczek wnioskowanych/wypłaconych na przedsięwzięcia z Tab. 3 (tj. ocieplenie przegród, wymiana stolarki, wentylacja mechaniczna):</label>
-            <input type="text" name="zaliczkiPrzed3" placeholder="0.00" class="kwota" required>
+            <input type="text" name="zaliczkiPrzed3" placeholder="0.00" class="kwota">
             <br><br>
         </div>
         <div id="sekcjaWopy" style="display:none;">
             <label>Kwota dotacji wnioskowanych/wypłaconych na przedsięwzięcia z Tab. 1 i 2 (tj. audyt, źródło ciepła, instalacja C.O. i C.W.U.):</label>
-            <input type="text" name="dotacjaPrzed12" placeholder="0.00" class="kwota" required>
+            <input type="text" name="dotacjaPrzed12" placeholder="0.00" class="kwota">
             <br><br>
 
             <label>Kwota dotacji wnioskowanych/wypłaconych na przedsięwzięcia z Tab. 3 (tj. ocieplenie przegród, wymiana stolarki, wentylacja mechaniczna):</label>
-            <input type="text" name="dotacjaPrzed3" placeholder="0.00" class="kwota" required>
+            <input type="text" name="dotacjaPrzed3" placeholder="0.00" class="kwota">
             <br><br>
         </div>
 

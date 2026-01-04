@@ -57,40 +57,37 @@ function obliczZaliczke(array $post, array $kwoty): array {
     }
 
     // Obliczenie innych kosztów nietermo
-    foreach ($slownik['nietermo_pozostale'] as $nazwa => $limit) {
-        $wybor = $post['nietermo'][$nazwa]['wybor'] ?? 0;
-        $kwota = floatval($post['nietermo'][$nazwa]['kwota']) ?? 0;
+    if (!empty($post['nietermo'])) {
+        foreach ($slownik['nietermo_pozostale'] as $nazwa => $limit) {
+            $wybor = $post['nietermo'][$nazwa]['wybor'] ?? 0;
+            $kwota  = floatval($post['nietermo'][$nazwa]['kwota'] ?? 0);
 
-        if (!$wybor || $kwota <= 0)
-            continue;
+            if (!$wybor || $kwota <= 0) continue;
 
-        $kwotaDotacjiPozostale = ($wyborDof === '2')
-            ? min($kwota * 0.7, $limit)
-            : min($kwota, $limit);
-        
+            $kwotaDotacjiPozostale = ($wyborDof === '2')
+                ? min($kwota * 0.7, $limit)
+                : min($kwota, $limit);
+
             $dotacjaNietermo += $kwotaDotacjiPozostale;
+        }
     }
 
     // Obliczenia kosztów termo
-    foreach ($slownik['termo'] as $nazwa => $limit) {
-        if ($nazwa === "Wentylacja mechaniczna z odzyskiem ciepła"
-        || $nazwa === "Wentylacja mechaniczna z odzyskiem ciepła - rekuperator ścienny"){
-        continue;}
+    if (!empty($post['termo'])) {
+        foreach ($slownik['termo'] as $nazwa => $limit) {
+            $wybor = $post['termo'][$nazwa]['wybor'] ?? 0;
+            $liczba = floatval($post['termo'][$nazwa]['liczba'] ?? 0);
+            $kwota  = floatval($post['termo'][$nazwa]['kwota'] ?? 0);
 
-        $wybor = $post['termo'][$nazwa]['wybor'] ?? 0;
-        $liczba = floatval($post['termo'][$nazwa]['liczba']) ?? 0;
-        $kwota = floatval($post['termo'][$nazwa]['kwota']) ?? 0;
+            if (!$wybor || $kwota <= 0) continue;
 
-        if (!$wybor || $kwota <= 0)
-            continue;
+            $maxLimit = $limit * $liczba;
+            $kwotaDotacjiTermo = ($wyborDof === '2')
+                ? min($kwota * 0.7, $maxLimit)
+                : min($kwota, $maxLimit);
 
-        $maxLimit = $limit * $liczba;
-
-        $kwotaDotacjiTermo = ($wyborDof === '2')
-            ? min($kwota * 0.7, $maxLimit)
-            : min($kwota, $maxLimit);
-        
-        $dotacjaTermo += $kwotaDotacjiTermo;
+            $dotacjaTermo += $kwotaDotacjiTermo;
+        }
     }
 
     // Obliczenia dla rekuperacji
